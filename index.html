@@ -31,6 +31,41 @@
             pointer-events: none;
         }
         
+        /* Film page floating animations */
+        #content-page .collage-element, #content-page .fish-decor {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        #content-page .collage-element:nth-child(odd), #content-page .fish-decor:nth-child(odd) {
+            animation-duration: 8s;
+            animation-delay: 0.5s;
+        }
+        
+        #content-page .collage-element:nth-child(3n), #content-page .fish-decor:nth-child(3n) {
+            animation-duration: 7s;
+            animation-delay: 1.5s;
+        }
+        
+        #content-page .collage-element:nth-child(2n), #content-page .fish-decor:nth-child(2n) {
+            animation-name: float-rotate;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-15px) translateX(10px); }
+            50% { transform: translateY(0) translateX(20px); }
+            75% { transform: translateY(15px) translateX(10px); }
+            100% { transform: translateY(0) translateX(0); }
+        }
+        
+        @keyframes float-rotate {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-15px) translateX(10px) rotate(5deg); }
+            50% { transform: translateY(0) translateX(20px) rotate(0deg); }
+            75% { transform: translateY(15px) translateX(10px) rotate(-5deg); }
+            100% { transform: translateY(0) translateX(0) rotate(0deg); }
+        }
+        
         .circle {
             width: 100px;
             height: 100px;
@@ -77,6 +112,23 @@
             opacity: 0.2;
             z-index: 3;
             pointer-events: none;
+            animation: moveWavesLanding 15s linear infinite;
+        }
+        
+        @keyframes moveWavesLanding {
+            0% { background-position: 0 0; }
+            100% { background-position: 120px 0; }
+        }
+        
+        /* Animated zigzag for games page */
+        #games-page .zigzag-pattern {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="20" viewBox="0 0 120 20"><path d="M0,10 L20,0 L40,10 L60,0 L80,10 L100,0 L120,10" fill="none" stroke="rgba(0,195,255,0.2)" stroke-width="2"/></svg>');
+            animation: moveWaves 10s linear infinite;
+        }
+        
+        @keyframes moveWaves {
+            0% { background-position: 0 0; }
+            100% { background-position: 120px 0; }
         }
         
         /* Landing Page */
@@ -127,23 +179,14 @@
         }
         
         .logo-container {
-            margin-bottom: 50px;
-            width: 300px;
-            height: 100px;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 2px solid rgba(255,255,255,0.3);
             position: relative;
-            background-color: rgba(0,0,0,0.5);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-            animation: pulse 3s infinite alternate;
             z-index: 10;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
-            100% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.4); }
         }
         
         .logo-text {
@@ -192,7 +235,6 @@
             font-weight: bold;
             text-transform: uppercase;
             background-color: transparent;
-            border: 2px solid #fff;
             color: #fff;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -218,15 +260,392 @@
             left: 100%;
         }
         
-        .btn:hover {
-            background-color: #FFD700;
+        .btn.store-btn {
+            border: 2px solid #007bff;
+        }
+        
+        .btn.store-btn:hover {
+            background-color: #007bff;
+        }
+        
+        .btn.films-btn {
+            border: 2px solid #ffc107;
+        }
+        
+        .btn.films-btn:hover {
+            background-color: #ffc107;
             color: #000;
-            border-color: #FFD700;
+        }
+        
+        .btn.games-btn {
+            border: 2px solid #dc3545;
+        }
+        
+        .btn.games-btn:hover {
+            background-color: #dc3545;
+        }
+        
+        .press-start {
+            margin-top: 30px;
+            text-align: center;
+            animation: blink 1s infinite alternate;
+            z-index: 10;
+            width: 25%;
+            margin: 20px auto 0;
+        }
+        
+        .press-start img {
+            width: 100%;
+        }
+        
+        @keyframes blink {
+            from { opacity: 1; }
+            to { opacity: 0.3; }
         }
         
         /* Content Page */
-        #content-page {
+        #content-page, #games-page {
             display: none;
+        }
+        
+        /* Game Page Specific Styles */
+        #games-page {
+            background-color: #0a0a20;
+            color: #e0f2ff;
+        }
+        
+        #games-page .header {
+            background: linear-gradient(to bottom, #0a0a20, #1a1a40);
+            height: 50vh; /* Changed from 100vh to 50vh */
+        }
+        
+        #games-page .header-title {
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.8), 0 0 25px rgba(0, 100, 255, 0.5);
+            animation: neonPulse 2s infinite alternate, textFloat 5s ease-in-out infinite;
+            position: relative;
+        }
+        
+        @keyframes neonPulse {
+            0% { text-shadow: 0 0 15px rgba(0, 195, 255, 0.8), 0 0 25px rgba(0, 100, 255, 0.5); }
+            100% { text-shadow: 0 0 25px rgba(0, 195, 255, 0.9), 0 0 40px rgba(0, 100, 255, 0.7); }
+        }
+        
+        @keyframes textFloat {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        /* Game icons instead of geometric shapes */
+        #games-page .collage-element {
+            transform: none;
+            opacity: 0;
+            animation: fadeInOutRandomPosition 10s infinite;
+            position: absolute;
+        }
+        
+        /* Stagger animations for different elements */
+        #games-page .collage-element:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        #games-page .collage-element:nth-child(2) {
+            animation-delay: 2s;
+        }
+        
+        #games-page .collage-element:nth-child(3) {
+            animation-delay: 4s;
+        }
+        
+        #games-page .d-pad {
+            opacity: 0;
+            animation: fadeInOutRandomPosition 10s infinite;
+            position: absolute;
+        }
+        
+        #games-page .d-pad:nth-child(4) {
+            animation-delay: 1s;
+        }
+        
+        #games-page .d-pad:nth-child(5) {
+            animation-delay: 3s;
+        }
+        
+        @keyframes fadeInOutRandomPosition {
+            0% { 
+                opacity: 0; 
+                top: var(--random-top-1, 20%); 
+                left: var(--random-left-1, 20%); 
+            }
+            10% { 
+                opacity: 0.7; 
+                top: var(--random-top-1, 20%); 
+                left: var(--random-left-1, 20%); 
+            }
+            45% { 
+                opacity: 0.7; 
+                top: var(--random-top-2, 60%); 
+                left: var(--random-left-2, 60%); 
+            }
+            50% { 
+                opacity: 0; 
+                top: var(--random-top-2, 60%); 
+                left: var(--random-left-2, 60%); 
+            }
+            60% { 
+                opacity: 0.7; 
+                top: var(--random-top-3, 40%); 
+                left: var(--random-left-3, 80%); 
+            }
+            90% { 
+                opacity: 0.7; 
+                top: var(--random-top-3, 40%); 
+                left: var(--random-left-3, 80%); 
+            }
+            100% { 
+                opacity: 0; 
+                top: var(--random-top-1, 20%); 
+                left: var(--random-left-1, 20%); 
+            }
+        }
+        
+        #games-page .circle {
+            background-color: transparent;
+            border: 3px solid rgba(0, 195, 255, 0.6);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            animation: rotate 10s linear infinite;
+        }
+        
+        #games-page .square {
+            background-color: transparent;
+            width: 60px;
+            height: 60px;
+            transform: none;
+            position: relative;
+        }
+        
+        #games-page .square:before, #games-page .square:after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255, 50, 150, 0.7);
+        }
+        
+        #games-page .square:before {
+            top: 45%;
+            left: 0;
+            width: 100%;
+            height: 10%;
+        }
+        
+        #games-page .square:after {
+            left: 45%;
+            top: 0;
+            height: 100%;
+            width: 10%;
+        }
+        
+        #games-page .triangle {
+            border: none;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 52px solid rgba(120, 255, 50, 0.7);
+            transform: rotate(90deg);
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Game section styling */
+        #games-page .game-section {
+            background: linear-gradient(45deg, #0f0f25 0%, #1e1e45 100%);
+            border-top: 2px solid rgba(0, 195, 255, 0.3);
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #games-page .game-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(rgba(0, 195, 255, 0.1) 2px, transparent 2px),
+                radial-gradient(rgba(0, 195, 255, 0.1) 2px, transparent 2px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            animation: moveGrid 20s linear infinite;
+            z-index: 0;
+            opacity: 0.3;
+        }
+        
+        @keyframes moveGrid {
+            from { background-position: 0 0, 25px 25px; }
+            to { background-position: 50px 50px, 75px 75px; }
+        }
+        
+        #games-page .pattern-overlay {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="20" stroke="rgba(0,195,255,0.1)" stroke-width="1" fill="none"/></svg>');
+            background-size: 60px 60px;
+        }
+        
+        #games-page .game-container {
+            backdrop-filter: blur(3px);
+            background-color: rgba(10, 10, 35, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
+            padding: 30px;
+            z-index: 5;
+        }
+        
+        #games-page .game-frame {
+            border: 3px solid rgba(0, 195, 255, 0.8);
+            transform: none;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        #games-page .game-frame:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 195, 255, 0.8);
+        }
+        
+        #games-page .game-info {
+            background: transparent;
+            padding: 30px 0 0 0;
+            border-left: none;
+            border-top: 4px solid rgba(0, 195, 255, 0.8);
+            margin-top: 20px;
+        }
+        
+        #games-page .game-info:before {
+            display: none;
+        }
+        
+        #games-page .game-title {
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            color: rgba(0, 195, 255, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.7);
+            font-size: 38px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        
+        #games-page .game-description {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.8;
+            font-size: 16px;
+            color: #e0f2ff;
+            margin-bottom: 25px;
+        }
+        
+        #games-page .game-credits {
+            color: rgba(0, 195, 255, 0.7);
+            font-size: 14px;
+            border-top: 1px solid rgba(0, 195, 255, 0.3);
+            padding-top: 15px;
+        }
+        
+        /* Game-specific background colors */
+        #games-page #game1 {
+            background: linear-gradient(135deg, #1a0028 0%, #3a0060 100%);
+        }
+        
+        #games-page #game2 {
+            background: linear-gradient(135deg, #00282a 0%, #004a60 100%);
+        }
+        
+        #games-page #game3 {
+            background: linear-gradient(135deg, #1f1a00 0%, #3a3500 100%);
+        }
+        
+        /* Footer for games page */
+        #games-page .footer {
+            background-color: #0a0a20;
+            border-top: 2px solid rgba(0, 195, 255, 0.5);
+            color: #e0f2ff;
+        }
+        
+        #games-page .footer-link {
+            border: 1px solid rgba(0, 195, 255, 0.8);
+            color: rgba(0, 195, 255, 1);
+            background-color: rgba(10, 10, 32, 0.8);
+            transition: all 0.3s ease;
+        }
+        
+        #games-page .footer-link:hover {
+            background-color: rgba(0, 195, 255, 0.8);
+            color: #0a0a20;
+            transform: translateY(-3px);
+        }
+        
+        #games-page .copyright {
+            color: rgba(224, 242, 255, 0.6);
+        }
+        
+        /* Game controller icons */
+        .controller-icon {
+            position: absolute;
+            width: 40px;
+            height: 30px;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .d-pad {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .d-pad:before, .d-pad:after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .d-pad:before {
+            top: 30%;
+            left: 0;
+            width: 100%;
+            height: 40%;
+        }
+        
+        .d-pad:after {
+            left: 30%;
+            top: 0;
+            height: 100%;
+            width: 40%;
+        }
+        
+        /* Navigation */
+        #games-page .nav-button {
+            background-color: rgba(0, 195, 255, 0.8);
+            color: #0a0a20;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Arial Black', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        #games-page .nav-button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #0a0a20;
+            box-shadow: 0 0 15px rgba(0, 195, 255, 0.8);
         }
         
         .header {
@@ -276,7 +695,7 @@
             100% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.6); }
         }
         
-        .film-section {
+        .film-section, .game-section {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -285,7 +704,7 @@
             position: relative;
         }
         
-        .film-container {
+        .film-container, .game-container {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -296,7 +715,7 @@
             z-index: 2;
         }
         
-        .film-video {
+        .film-video, .game-frame {
             flex: 1;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             position: relative;
@@ -305,7 +724,7 @@
             border: 10px solid white;
         }
         
-        .film-video:after {
+        .film-video:after, .game-frame:after {
             content: '';
             position: absolute;
             top: 10px;
@@ -317,13 +736,13 @@
             pointer-events: none;
         }
         
-        .film-video iframe, .film-video video {
+        .film-video iframe, .film-video video, .game-frame iframe {
             width: 100%;
             height: 400px;
             display: block;
         }
         
-        .film-info {
+        .film-info, .game-info {
             flex: 1;
             padding: 30px;
             position: relative;
@@ -332,7 +751,7 @@
             background-color: transparent;
         }
         
-        .film-info:before {
+        .film-info:before, .game-info:before {
             content: '';
             position: absolute;
             top: 0;
@@ -345,7 +764,7 @@
             transform: rotate(1deg);
         }
         
-        .film-title {
+        .film-title, .game-title {
             font-size: 36px;
             font-weight: bold;
             margin-bottom: 20px;
@@ -354,25 +773,25 @@
             letter-spacing: 2px;
         }
         
-        .film-description {
+        .film-description, .game-description {
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 20px;
         }
         
-        .film-credits {
+        .film-credits, .game-credits {
             font-size: 14px;
             opacity: 0.7;
         }
         
-        /* Film Section Styling */
-        #film1 {
+        /* Section Styling */
+        #film1, #game1 {
             background-color: #FF4500;
             position: relative;
             overflow: hidden;
         }
         
-        #film1::before {
+        #film1::before, #game1::before {
             content: '';
             position: absolute;
             top: 0;
@@ -384,13 +803,13 @@
             z-index: 0;
         }
         
-        #film2 {
+        #film2, #game2 {
             background-color: #1E90FF;
             position: relative;
             overflow: hidden;
         }
         
-        #film2::before {
+        #film2::before, #game2::before {
             content: '';
             position: absolute;
             top: 0;
@@ -402,18 +821,18 @@
             z-index: 0;
         }
         
-        #film2 .pattern-overlay {
+        #film2 .pattern-overlay, #game2 .pattern-overlay {
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="30" cy="30" r="15" stroke="rgba(255,255,255,0.1)" stroke-width="1" fill="none"/></svg>');
             background-size: 60px 60px;
         }
         
-        #film3 {
+        #film3, #game3 {
             background-color: #32CD32;
             position: relative;
             overflow: hidden;
         }
         
-        #film3::before {
+        #film3::before, #game3::before {
             content: '';
             position: absolute;
             top: 0;
@@ -425,7 +844,7 @@
             z-index: 0;
         }
         
-        #film3 .pattern-overlay {
+        #film3 .pattern-overlay, #game3 .pattern-overlay {
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><rect x="0" y="0" width="20" height="20" fill="rgba(255,255,255,0.05)"/><rect x="20" y="20" width="20" height="20" fill="rgba(255,255,255,0.05)"/></svg>');
             background-size: 40px 40px;
         }
@@ -440,6 +859,16 @@
             transform: rotate(90deg);
             z-index: 1;
             opacity: 0.3;
+        }
+        
+        /* Bounce animation for fish decor */
+        #content-page .fish-decor {
+            animation: fishBounce 5s ease-in-out infinite;
+        }
+        
+        @keyframes fishBounce {
+            0%, 100% { transform: rotate(90deg) translateY(0); }
+            50% { transform: rotate(110deg) translateY(-20px); }
         }
         
         /* Footer */
@@ -533,6 +962,24 @@
             background-color: #000;
             color: #FFD700;
         }
+
+        /* Modify for Game2 container (Dungeon Looter) */
+        #game2 .game-container {
+            flex-direction: column;
+        }
+
+        #game2 .game-frame {
+            width: 100%;
+        }
+
+        #game2 .game-info {
+            width: 100%;
+            border-left: none;
+            border-top: 4px solid rgba(0, 195, 255, 0.8);
+            padding-left: 0;
+            margin-top: 20px;
+            padding-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -546,31 +993,30 @@
         <div class="pattern-overlay"></div>
         <div class="zigzag-pattern"></div>
         
-        <!-- Decorative Elements -->
-        <div class="collage-element circle" style="top: 20%; left: 15%;"></div>
-        <div class="collage-element square" style="bottom: 30%; right: 10%;"></div>
-        <div class="collage-element triangle" style="top: 70%; left: 80%;"></div>
-        <div class="fish-decor" style="top: 40%; left: 70%;"></div>
-        <div class="fish-decor" style="bottom: 20%; right: 30%;"></div>
+        <!-- Bouncing Akiba Logos -->
+        <div class="akiba-logo"></div>
+        <div class="akiba-logo"></div>
+        <div class="akiba-logo"></div>
         
         <div class="logo-container">
-            <div class="logo-text">Akiba's World</div>
-            <div class="fish-icon">
-                <div class="fish-eye"></div>
-            </div>
+            <img src="https://i.imgur.com/RSXgarv.png" alt="Akiba's World" style="width: 100%;">
         </div>
         <div class="buttons">
-            <a href="https://akibastudios.com/" target="_blank" class="btn">Shop</a>
-            <button onclick="showContentPage()" class="btn">Watch</button>
+            <a href="https://akibastudios.com/" target="_blank" class="btn store-btn">STORE</a>
+            <button onclick="showContentPage()" class="btn films-btn">FILMS</button>
+            <button onclick="showGamesPage()" class="btn games-btn">GAMES</button>
+        </div>
+        <div class="press-start">
+            <img src="https://i.imgur.com/3xc6JpS.png" alt="Press Start">
         </div>
     </div>
     
-    <!-- Content Page -->
+    <!-- Content Page (Films) -->
     <div id="content-page">
         <button onclick="showLandingPage()" class="nav-button">Back</button>
         
         <!-- Header Section -->
-        <div class="header">
+        <div class="header" style="height: 50vh;">
             <div class="header-overlay"></div>
             <div class="video-texture"></div>
             <div class="pattern-overlay"></div>
@@ -578,14 +1024,10 @@
             <video autoplay muted loop class="header-video">
                 <source src="https://cdn.shopify.com/videos/c/o/v/9b081394371a4d7b8edc10c637ee5564.mov" type="video/mp4">
             </video>
-            <h1 class="header-title">Akiba's World</h1>
-            
-            <!-- Decorative Elements -->
-            <div class="collage-element circle" style="top: 10%; left: 10%;"></div>
-            <div class="collage-element square" style="top: 70%; left: 80%;"></div>
-            <div class="collage-element triangle" style="top: 60%; left: 20%;"></div>
-            <div class="fish-decor" style="top: 30%; left: 70%;"></div>
-            <div class="fish-decor" style="top: 80%; left: 40%;"></div>
+            <div style="display: flex; flex-direction: column; align-items: center; z-index: 1; margin-top: -40px;">
+                <img src="https://i.imgur.com/fRLeScV.png" alt="Akiba's Logo" style="width: 450px;">
+                <h1 class="header-title" style="font-size: 40px; margin-top: 10px;">AKIBA'S FILMS</h1>
+            </div>
         </div>
         
         <!-- Film 1 Section -->
@@ -664,8 +1106,116 @@
         <footer class="footer">
             <div class="footer-pattern"></div>
             <div class="footer-links">
-                <a href="https://akibastudios.com/" target="_blank" class="footer-link">Shop</a>
+                <a href="https://akibastudios.com/" target="_blank" class="footer-link">STORE</a>
                 <a href="https://www.youtube.com/@AkibaStudios" target="_blank" class="footer-link">YouTube</a>
+                <a href="https://www.instagram.com/akibahaiozi/" target="_blank" class="footer-link">Instagram</a>
+                <a href="javascript:showGamesPage();" class="footer-link">GAMES</a>
+            </div>
+            <p class="copyright">© 2025 Akiba's World. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Games Page -->
+    <div id="games-page">
+        <button onclick="showLandingPage()" class="nav-button">Back</button>
+        
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-overlay"></div>
+            <div class="video-texture"></div>
+            <div class="pattern-overlay"></div>
+            <div class="zigzag-pattern"></div>
+            <video autoplay muted loop class="header-video">
+                <source src="https://cdn.shopify.com/videos/c/o/v/9b081394371a4d7b8edc10c637ee5564.mov" type="video/mp4">
+            </video>
+            <h1 class="header-title">AKIBA ARCADE</h1>
+            
+            <!-- Game-themed Decorative Elements -->
+            <div class="collage-element circle" style="top: 10%; left: 10%;"></div>
+            <div class="collage-element square" style="top: 70%; left: 80%;"></div>
+            <div class="collage-element triangle" style="top: 60%; left: 20%;"></div>
+            <div class="d-pad" style="top: 30%; left: 70%;"></div>
+            <div class="d-pad" style="top: 80%; left: 40%;"></div>
+        </div>
+        
+        <!-- Game 1 Section -->
+        <section id="game1" class="game-section">
+            <div class="pattern-overlay"></div>
+            <div class="game-container">
+                <div class="game-frame">
+                    <iframe width="100%" height="400" allow="fullscreen; autoplay; encrypted-media" src="https://games.construct.net/904/latest" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no" muted></iframe>
+                </div>
+                <div class="game-info">
+                    <h2 class="game-title">AKIBA BEAR ADVENTURE</h2>
+                    <p class="game-description">
+                        Join Akiba Bear on an epic adventure! Help him navigate through challenging terrains and obstacles as he embarks on a quest to find the elusive Polar Bear. Collect special items, solve puzzles, and discover hidden secrets along the way.
+                    </p>
+                    <div class="game-credits">
+                        Developed by: Akiba Studios<br>
+                        Game Design: Akiba Team
+                    </div>
+                </div>
+            </div>
+            <!-- Game-themed Decorative Elements -->
+            <div class="collage-element circle" style="top: 15%; right: 10%;"></div>
+            <div class="collage-element square" style="bottom: 20%; left: 5%;"></div>
+            <div class="d-pad" style="top: 30%; right: 30%;"></div>
+        </section>
+        
+        <!-- Game 2 Section -->
+        <section id="game2" class="game-section">
+            <div class="pattern-overlay"></div>
+            <div class="game-container">
+                <div class="game-frame">
+                    <iframe width="100%" height="400" allow="fullscreen; autoplay; encrypted-media" src="https://games.construct.net/2/latest" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no" muted></iframe>
+                </div>
+                <div class="game-info">
+                    <h2 class="game-title">DUNGEON LOOTER</h2>
+                    <p class="game-description">
+                        Enter the dungeon, loot monsters and return to Akiba's hut to upgrade your gear. Return to fight harder and tougher monsters! This roguelike adventure features procedurally generated dungeons, a variety of enemies, and unique loot to discover on each run.
+                    </p>
+                    <div class="game-credits">
+                        Developed by: Akiba Game Studios<br>
+                        Lead Designer: Akiba Team
+                    </div>
+                </div>
+            </div>
+            <!-- Game-themed Decorative Elements -->
+            <div class="collage-element circle" style="bottom: 15%; right: 20%;"></div>
+            <div class="collage-element triangle" style="top: 20%; left: 15%;"></div>
+            <div class="d-pad" style="bottom: 30%; left: 40%;"></div>
+        </section>
+        
+        <!-- Game 3 Section -->
+        <section id="game3" class="game-section">
+            <div class="pattern-overlay"></div>
+            <div class="game-container">
+                <div class="game-frame">
+                    <iframe width="100%" height="400" allow="fullscreen; autoplay; encrypted-media" src="https://games.construct.net/253/latest" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no" muted></iframe>
+                </div>
+                <div class="game-info">
+                    <h2 class="game-title">FASHION FRENZY</h2>
+                    <p class="game-description">
+                        Become the ultimate fashion designer in this fast-paced game! Create stylish outfits, run your own boutique, and dress models for runway shows. Compete against AI designers or challenge your friends in multiplayer mode to see who can create the most innovative and trendy designs.
+                    </p>
+                    <div class="game-credits">
+                        Developed by: Akiba Interactive<br>
+                        Art Direction: Akiba Design Team
+                    </div>
+                </div>
+            </div>
+            <!-- Game-themed Decorative Elements -->
+            <div class="collage-element square" style="top: 10%; right: 15%;"></div>
+            <div class="collage-element circle" style="bottom: 20%; left: 20%;"></div>
+            <div class="d-pad" style="top: 40%; left: 10%;"></div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-pattern"></div>
+            <div class="footer-links">
+                <a href="https://akibastudios.com/" target="_blank" class="footer-link">STORE</a>
+                <a href="javascript:showContentPage();" class="footer-link">FILMS</a>
                 <a href="https://www.instagram.com/akibahaiozi/" target="_blank" class="footer-link">Instagram</a>
             </div>
             <p class="copyright">© 2025 Akiba's World. All rights reserved.</p>
@@ -678,16 +1228,62 @@
             // Make sure landing page is visible and content page is hidden initially
             document.getElementById('landing-page').style.display = 'flex';
             document.getElementById('content-page').style.display = 'none';
+            document.getElementById('games-page').style.display = 'none';
+            
+            // Set random positions for game elements using CSS variables
+            setupRandomPositions();
+            
+            // Mute all embedded games by default
+            muteAllGames();
+        }
+        
+        // Mute all embedded game iframes
+        function muteAllGames() {
+            const gameIframes = document.querySelectorAll('.game-frame iframe');
+            gameIframes.forEach(iframe => {
+                iframe.setAttribute('muted', '');
+                // Note: The muted attribute helps, but iframe audio control depends on the content source
+            });
+        }
+        
+        // Setup random positions for game page elements
+        function setupRandomPositions() {
+            // Get all game page decorative elements
+            const gameElements = document.querySelectorAll('#games-page .collage-element, #games-page .d-pad');
+            
+            // Set random positions for each element
+            gameElements.forEach(element => {
+                // Set three sets of random positions for the animation keyframes
+                element.style.setProperty('--random-top-1', Math.floor(Math.random() * 70) + 10 + '%');
+                element.style.setProperty('--random-left-1', Math.floor(Math.random() * 70) + 10 + '%');
+                
+                element.style.setProperty('--random-top-2', Math.floor(Math.random() * 70) + 10 + '%');
+                element.style.setProperty('--random-left-2', Math.floor(Math.random() * 70) + 10 + '%');
+                
+                element.style.setProperty('--random-top-3', Math.floor(Math.random() * 70) + 10 + '%');
+                element.style.setProperty('--random-left-3', Math.floor(Math.random() * 70) + 10 + '%');
+            });
         }
         
         // Navigation functions
         function showContentPage() {
             document.getElementById('landing-page').style.display = 'none';
             document.getElementById('content-page').style.display = 'block';
+            document.getElementById('games-page').style.display = 'none';
+        }
+        
+        function showGamesPage() {
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('content-page').style.display = 'none';
+            document.getElementById('games-page').style.display = 'block';
+            
+            // Refresh random positions when showing games page
+            setupRandomPositions();
         }
         
         function showLandingPage() {
             document.getElementById('content-page').style.display = 'none';
+            document.getElementById('games-page').style.display = 'none';
             document.getElementById('landing-page').style.display = 'flex';
         }
     </script>
