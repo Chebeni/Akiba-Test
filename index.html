@@ -1,25 +1,8 @@
-        <style>
-            /* Specifically target and remove the blue bar above Dungeon Looter */
-            .game-section .horizontal-blue-bar,
-            #game2::before,
-            #game2 .game-container::before,
-            #game2 .blue-line-top,
-            #games-page #game2 > *::before {
-                display: none !important;
-                border: none !important;
-                background: none !important;
-                height: 0 !important;
-            }
-            
-            /* Remove any horizontal borders/lines above game sections */
-            #games-page .game-section {
-                border-top: none !important;
-            }
-        </style><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Akiba's World</title>
     <style>
         /* Global Styles */
@@ -244,6 +227,7 @@
             gap: 30px;
             position: relative;
             z-index: 5;
+            text-align: center;
         }
         
         .btn {
@@ -260,6 +244,11 @@
             overflow: hidden;
             box-shadow: 0 0 15px rgba(0,0,0,0.3);
             z-index: 10;
+            /* Button centering fix */
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .btn:after {
@@ -343,6 +332,64 @@
             text-shadow: 0 0 15px rgba(0, 195, 255, 0.8), 0 0 25px rgba(0, 100, 255, 0.5);
             animation: neonPulse 2s infinite alternate, textFloat 5s ease-in-out infinite;
             position: relative;
+        }
+        
+        /* Better responsiveness for the games page header logo */
+        #games-page .header-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            width: 100%;
+            padding: 0;
+            text-align: center;
+        }
+        
+        #games-page .header-logo {
+            width: 100%;
+            max-width: 1000px;
+            min-width: 300px;
+            cursor: pointer;
+            margin: 0 auto; /* Center the logo */
+        }
+        
+        /* Strong mobile overrides */
+        @media (max-width: 767px) {
+            #games-page .header {
+                height: 50vh !important;
+                min-height: 300px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            
+            #games-page .header-logo-container {
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+                width: 100% !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+            }
+            
+            #games-page .header-logo {
+                width: auto !important; /* Changed from 100% to auto */
+                max-width: 90% !important;
+                min-width: 300px !important;
+                transform: scale(1.2) !important;
+                margin: 0 auto !important; /* Ensure centering */
+                position: relative !important; /* Ensure positioning context is reset */
+                left: 0 !important; /* Reset any potential offset */
+                right: 0 !important; /* Reset any potential offset */
+            }
+        }
+
+        /* Extra small devices */
+        @media only screen and (max-width: 480px) {
+            #games-page .header-logo {
+                transform: scale(1.3) !important; /* Even bigger on very small screens */
+                max-width: 85% !important; /* Slightly smaller max-width to ensure it fits */
+            }
         }
         
         @keyframes neonPulse {
@@ -554,11 +601,7 @@
         }
         
         /* Game specific layouts */
-        #game1 .game-container, #game3 .game-container {
-            flex-direction: row;
-        }
-        
-        #game2 .game-container {
+        #game1 .game-container, #game2 .game-container, #game3 .game-container {
             flex-direction: row;
         }
         
@@ -571,41 +614,40 @@
             position: relative;
         }
         
-        #game1 .game-info, #game3 .game-info {
+        /* Game 1 */
+        #game1 .game-info {
             border-right: none;
+            padding-left: 30px;
+            border-left: 4px solid rgba(0, 195, 255, 0.8);
         }
         
-        #game1 .game-info::before, #game3 .game-info::before {
-            content: '';
-            position: absolute;
-            top: 10%;
-            right: 0;
-            height: 80%;
-            width: 4px;
-            background-color: rgba(0, 195, 255, 0.8);
-        }
-        
+        /* Game 2 */
         #game2 .game-info {
-            border-right: none;
+            border-right: 4px solid rgba(0, 195, 255, 0.8);
+            padding-right: 30px;
+            border-left: none;
         }
         
-        #game2 .game-info::before {
-            content: '';
-            position: absolute;
-            top: 10%;
-            left: 0;
-            height: 80%;
-            width: 4px;
-            background-color: rgba(0, 195, 255, 0.8);
+        /* Game 3 */
+        #game3 .game-info {
+            border-right: none;
+            padding-left: 30px;
+            border-left: 4px solid rgba(0, 195, 255, 0.8);
+        }
+        
+        /* Remove any before/after elements that might interfere */
+        #game1 .game-info::before, 
+        #game2 .game-info::before, 
+        #game3 .game-info::before,
+        #game1 .game-info::after, 
+        #game2 .game-info::after, 
+        #game3 .game-info::after {
+            display: none;
         }
         
         #games-page .game-frame {
             flex: 1;
             transform: none;
-        }
-        
-        #games-page .game-info:before {
-            display: none;
         }
         
         #games-page .game-title {
@@ -663,7 +705,7 @@
         #games-page #game2 .game-container {
             display: flex;
             flex-direction: row;
-            align-items: stretch;
+            align-items: center;
             background-color: rgba(10, 10, 35, 0.7);
             border-radius: 15px;
             box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
@@ -673,6 +715,7 @@
         
         #games-page #game2 .game-frame {
             flex: 1;
+            order: 2;
             border: 3px solid rgba(0, 195, 255, 0.8);
             border-radius: 8px;
             overflow: hidden;
@@ -687,18 +730,12 @@
         
         #games-page #game2 .game-info {
             flex: 1;
-            padding: 20px 40px;
+            order: 1;
+            padding: 0 30px 0 0;
             position: relative;
             background: transparent;
             color: #e0f2ff;
-            border-right: 4px solid rgba(0, 195, 255, 0.8);
-            padding-right: 30px;
-        }
-        
-        /* Remove the L shape around Dungeon Looter */
-        #games-page #game2 .game-info:before,
-        #games-page #game2 .game-info:after {
-            display: none;
+            border-top: none;
         }
         
         #games-page #game2 .game-title {
@@ -1119,23 +1156,231 @@
             background-color: #000;
             color: #FFD700;
         }
-
-        /* Modify for Game2 container (Dungeon Looter) */
-        #game2 .game-container {
-            flex-direction: column;
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 767px) {
+            /* Layout and Container Adjustments */
+            .film-container, .game-container {
+                flex-direction: column;
+                gap: 30px;
+                padding: 15px;
+            }
+            
+            .film-section, .game-section {
+                padding: 50px 15px;
+                min-height: auto;
+            }
+            
+            /* Typography Adjustments */
+            .header-title {
+                font-size: 36px;
+                letter-spacing: 2px;
+            }
+            
+            .logo-text {
+                font-size: 30px;
+            }
+            
+            .film-title, .game-title {
+                font-size: 26px;
+                margin-bottom: 15px;
+            }
+            
+            .film-description, .game-description {
+                font-size: 15px;
+                line-height: 1.5;
+            }
+            
+            /* Media Elements */
+            .film-video, .game-frame {
+                width: 100%;
+                transform: none;
+                border-width: 5px;
+            }
+            
+            .film-video iframe, .film-video video, .game-frame iframe {
+                height: 220px;
+            }
+            
+            /* Button and Navigation */
+            .nav-button {
+                top: 10px;
+                left: 10px;
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+                width: 80%;
+                text-align: center;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 16px;
+                text-align: center !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+            
+            .btn.store-btn, .btn.films-btn, .btn.games-btn {
+                text-align: center !important;
+                justify-content: center !important;
+                align-items: center !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            
+            /* Landing Page */
+            #landing-page {
+                padding: 20px;
+            }
+            
+            .logo-container {
+                width: 90%;
+                margin-bottom: 30px;
+            }
+            
+            .press-start {
+                width: 60%;
+            }
+            
+            .fish-icon {
+                transform: scale(0.8);
+                right: -15px;
+            }
+            
+            /* Header Sections */
+            .header {
+                height: 40vh;
+            }
+            
+            .header-overlay, .landing-overlay {
+                background: radial-gradient(circle at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.9) 100%);
+            }
+            
+            #content-page .header img {
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            /* Decorative Elements */
+            .collage-element {
+                transform: scale(0.7);
+                opacity: 0.2;
+            }
+            
+            .zigzag-pattern, .pattern-overlay {
+                opacity: 0.1;
+            }
+            
+            /* Footer */
+            .footer {
+                padding: 40px 15px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .footer-link {
+                width: 200px;
+                margin: 0 auto;
+            }
+            
+            /* Game sections */
+            #games-page .game-info::before,
+            #game1 .game-info::before, 
+            #game3 .game-info::before,
+            #game2 .game-info::before {
+                display: none;
+            }
+            
+            /* Fix for film info on mobile */
+            .film-info, .game-info {
+                padding: 25px 15px;
+            }
+            
+            /* About text in footer */
+            .about-text {
+                font-size: 13px;
+                padding: 0 10px;
+            }
+            
+            /* Fix game layouts for mobile */
+            /* Force all game containers to use column layout on mobile */
+            #game1 .game-container, 
+            #game2 .game-container,
+            #game3 .game-container,
+            #games-page #game1 .game-container,
+            #games-page #game2 .game-container,
+            #games-page #game3 .game-container {
+                flex-direction: column !important;
+            }
+            
+            /* Override the order for game2 on mobile */
+            #games-page #game2 .game-frame {
+                order: 1 !important;
+            }
+            
+            #games-page #game2 .game-info {
+                order: 2 !important;
+                padding: 20px 0 0 0 !important;
+                border-right: none !important;
+                border-top: 4px solid rgba(0, 195, 255, 0.8) !important;
+            }
+            
+            /* Ensure game frames are full width */
+            #game1 .game-frame,
+            #game2 .game-frame,
+            #game3 .game-frame {
+                width: 100% !important;
+                margin-bottom: 20px;
+            }
+            
+            /* Make all game info sections display properly */
+            #game1 .game-info,
+            #game2 .game-info,
+            #game3 .game-info,
+            #games-page #game1 .game-info,
+            #games-page #game2 .game-info, 
+            #games-page #game3 .game-info {
+                width: 100% !important;
+                border-right: none !important;
+                border-left: none !important;
+                border-top: 4px solid rgba(0, 195, 255, 0.8) !important;
+                padding: 20px 0 0 0 !important;
+                margin-top: 0 !important;
+            }
         }
 
-        #game2 .game-frame {
-            width: 100%;
-        }
-
-        #game2 .game-info {
-            width: 100%;
-            border-left: none;
-            border-top: 4px solid rgba(0, 195, 255, 0.8);
-            padding-left: 0;
-            margin-top: 20px;
-            padding-top: 20px;
+        /* Tablet Adjustments */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .film-container, .game-container {
+                gap: 30px;
+                padding: 20px;
+            }
+            
+            .header-title {
+                font-size: 60px;
+            }
+            
+            .buttons {
+                gap: 20px;
+            }
+            
+            .btn {
+                padding: 12px 30px;
+            }
+            
+            .film-video iframe, .film-video video, .game-frame iframe {
+                height: 320px;
+            }
         }
     </style>
 </head>
@@ -1282,7 +1527,7 @@
     <div id="games-page">
         <button onclick="showLandingPage()" class="nav-button">Back</button>
         
-        <!-- Header Section -->
+        <!-- Header Section - UPDATED VERSION WITH BIGGER MOBILE LOGO -->
         <div class="header">
             <div class="header-overlay"></div>
             <div class="video-texture"></div>
@@ -1291,8 +1536,8 @@
             <video autoplay muted loop class="header-video">
                 <source src="https://cdn.shopify.com/videos/c/o/v/9b081394371a4d7b8edc10c637ee5564.mov" type="video/mp4">
             </video>
-            <div style="display: flex; justify-content: center; align-items: center; z-index: 1;">
-                <img src="https://i.imgur.com/d4ZkQLG.gif" alt="Akiba Arcade" style="width: 1000px; cursor: pointer;" onclick="showLandingPage()">
+            <div class="header-logo-container">
+                <img src="https://i.imgur.com/d4ZkQLG.gif" alt="Akiba Arcade" class="header-logo" onclick="showLandingPage()" style="min-width: 300px; margin: 0 auto;">
             </div>
             
             <!-- Game-themed Decorative Elements -->
@@ -1327,35 +1572,10 @@
             <div class="d-pad" style="top: 30%; right: 30%;"></div>
         </section>
         
-        <!-- Game 2 Section -->
+        <!-- Game 2 Section (Runway Rush) - UPDATED LAYOUT -->
         <section id="game2" class="game-section">
             <div class="pattern-overlay"></div>
-            <div class="game-container" style="position: relative; border-top: none !important;">
-                <!-- Remove any blue lines or borders -->
-                <style>
-                    /* Hide any blue horizontal line above the title */
-                    #game2 .horizontal-line,
-                    #game2::before,
-                    #game2::after,
-                    #game2 .game-container::before,
-                    #game2 .game-container::after,
-                    #game2 .game-container > .horizontal-line,
-                    #game2 .game-title::before,
-                    #game2 .blue-bar {
-                        display: none !important;
-                    }
-                    
-                    /* Remove top border from container */
-                    #game2 .game-container {
-                        border-top: none !important;
-                    }
-                    
-                    #game2 .game-info {
-                        border-right: none !important;
-                        border-top: none !important;
-                    }
-                </style>
-                
+            <div class="game-container">
                 <div class="game-info">
                     <h2 class="game-title">RUNWAY RUSH</h2>
                     <p class="game-description">
@@ -1384,7 +1604,7 @@
                     <iframe width="100%" height="400" allow="fullscreen; autoplay; encrypted-media" src="https://games.construct.net/253/latest" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no" muted></iframe>
                 </div>
                 <div class="game-info">
-                    <h2 class="game-title">RUNWAY SWING</h2>
+                    <h2 class="game-title">STYLE SWING</h2>
                     <p class="game-description">
                         Become the ultimate fashion golfer in this stylish and fast-paced game! Compete against the computer or challenge friends in multiplayer mode to see who can score the best while looking their best. Will you be the most fashionable golfer on the course?
                     </p>
