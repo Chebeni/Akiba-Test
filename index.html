@@ -1,4 +1,21 @@
-<!DOCTYPE html>
+        <style>
+            /* Specifically target and remove the blue bar above Dungeon Looter */
+            .game-section .horizontal-blue-bar,
+            #game2::before,
+            #game2 .game-container::before,
+            #game2 .blue-line-top,
+            #games-page #game2 > *::before {
+                display: none !important;
+                border: none !important;
+                background: none !important;
+                height: 0 !important;
+            }
+            
+            /* Remove any horizontal borders/lines above game sections */
+            #games-page .game-section {
+                border-top: none !important;
+            }
+        </style><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -467,10 +484,23 @@
         /* Game section styling */
         #games-page .game-section {
             background: linear-gradient(45deg, #0f0f25 0%, #1e1e45 100%);
-            border-top: 2px solid rgba(0, 195, 255, 0.3);
+            border-top: none; /* Remove border-top */
             border-bottom: 2px solid rgba(0, 195, 255, 0.3);
             position: relative;
             overflow: hidden;
+        }
+        
+        /* Additional specific removal for the horizontal blue bar */
+        #games-page #game2::before,
+        #games-page #game2 .horizontal-bar,
+        #games-page #game2 .game-container::before,
+        #games-page #game2 > div::before {
+            display: none !important;
+        }
+        
+        /* Remove borders from all game sections */
+        #games-page .game-section::before {
+            background-image: none !important;
         }
         
         #games-page .game-section::before {
@@ -523,12 +553,55 @@
             box-shadow: 0 0 30px rgba(0, 195, 255, 0.8);
         }
         
+        /* Game specific layouts */
+        #game1 .game-container, #game3 .game-container {
+            flex-direction: row;
+        }
+        
+        #game2 .game-container {
+            flex-direction: row;
+        }
+        
         #games-page .game-info {
             background: transparent;
-            padding: 30px 0 0 0;
+            padding: 30px;
             border-left: none;
-            border-top: 4px solid rgba(0, 195, 255, 0.8);
-            margin-top: 20px;
+            border-top: none;
+            margin-top: 0;
+            position: relative;
+        }
+        
+        #game1 .game-info, #game3 .game-info {
+            border-right: none;
+        }
+        
+        #game1 .game-info::before, #game3 .game-info::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            right: 0;
+            height: 80%;
+            width: 4px;
+            background-color: rgba(0, 195, 255, 0.8);
+        }
+        
+        #game2 .game-info {
+            border-right: none;
+        }
+        
+        #game2 .game-info::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 0;
+            height: 80%;
+            width: 4px;
+            background-color: rgba(0, 195, 255, 0.8);
+        }
+        
+        #games-page .game-frame {
+            flex: 1;
+            transform: none;
         }
         
         #games-page .game-info:before {
@@ -566,6 +639,90 @@
         
         #games-page #game2 {
             background: linear-gradient(135deg, #00282a 0%, #004a60 100%);
+            border-top: none;
+            position: relative;
+        }
+        
+        /* Override any elements that might create the blue bar */
+        #games-page #game2::before {
+            content: none !important;
+            display: none !important;
+            border: none !important;
+            background: none !important;
+        }
+        
+        /* Make sure no horizontal lines appear */
+        #games-page #game2 hr,
+        #games-page #game2 .line,
+        #games-page #game2 .horizontal-line,
+        #games-page #game2 > *::before,
+        #games-page #game2 > div::before {
+            display: none !important;
+        }
+        
+        #games-page #game2 .game-container {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            background-color: rgba(10, 10, 35, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 100, 255, 0.2);
+            padding: 30px;
+            overflow: hidden;
+        }
+        
+        #games-page #game2 .game-frame {
+            flex: 1;
+            border: 3px solid rgba(0, 195, 255, 0.8);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        #games-page #game2 .game-frame:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 195, 255, 0.8);
+        }
+        
+        #games-page #game2 .game-info {
+            flex: 1;
+            padding: 20px 40px;
+            position: relative;
+            background: transparent;
+            color: #e0f2ff;
+            border-right: 4px solid rgba(0, 195, 255, 0.8);
+            padding-right: 30px;
+        }
+        
+        /* Remove the L shape around Dungeon Looter */
+        #games-page #game2 .game-info:before,
+        #games-page #game2 .game-info:after {
+            display: none;
+        }
+        
+        #games-page #game2 .game-title {
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            color: rgba(0, 195, 255, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.7);
+            font-size: 38px;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        
+        #games-page #game2 .game-description {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.8;
+            font-size: 16px;
+            color: #e0f2ff;
+            margin-bottom: 25px;
+        }
+        
+        #games-page #game2 .game-credits {
+            color: rgba(0, 195, 255, 0.7);
+            font-size: 14px;
+            border-top: 1px solid rgba(0, 195, 255, 0.3);
+            padding-top: 15px;
         }
         
         #games-page #game3 {
@@ -999,7 +1156,7 @@
         <div class="akiba-logo"></div>
         
         <div class="logo-container">
-            <img src="https://i.imgur.com/RSXgarv.png" alt="Akiba's World" style="width: 100%;">
+            <img src="https://i.imgur.com/rvMBhzR.gif" alt="Akiba's World" style="width: 100%;">
         </div>
         <div class="buttons">
             <a href="https://akibastudios.com/" target="_blank" class="btn store-btn">STORE</a>
@@ -1009,6 +1166,8 @@
         <div class="press-start">
             <img src="https://i.imgur.com/3xc6JpS.png" alt="Press Start">
         </div>
+        <p class="copyright" style="position: absolute; bottom: 10px; width: 100%; text-align: center; opacity: 0.7; font-size: 14px;">© 2025 AKIBA STUDIOS. All rights reserved.</p>
+        <p class="copyright" style="position: absolute; bottom: 10px; width: 100%; text-align: center; opacity: 0.7; font-size: 14px;">© 2025 AKIBA STUDIOS. All rights reserved.</p>
     </div>
     
     <!-- Content Page (Films) -->
@@ -1022,20 +1181,20 @@
             <div class="pattern-overlay"></div>
             <div class="zigzag-pattern"></div>
             <video autoplay muted loop class="header-video">
-                <source src="https://cdn.shopify.com/videos/c/o/v/9b081394371a4d7b8edc10c637ee5564.mov" type="video/mp4">
+                <source src="https://i.imgur.com/xfBSzDV.mp4" type="video/mp4">
             </video>
             <div style="display: flex; flex-direction: column; align-items: center; z-index: 1; margin-top: -40px;">
-                <img src="https://i.imgur.com/fRLeScV.png" alt="Akiba's Logo" style="width: 450px;">
-                <h1 class="header-title" style="font-size: 40px; margin-top: 10px;">AKIBA'S FILMS</h1>
+                <img src="https://i.imgur.com/3xCNOqo.png" alt="Akiba's Films" style="width: 550px; margin-top: 20px; cursor: pointer;" onclick="showLandingPage()">
             </div>
         </div>
         
         <!-- Film 1 Section -->
         <section id="film1" class="film-section">
             <div class="pattern-overlay"></div>
+            <h1 class="header-title" style="font-size: 40px; margin-bottom: 20px; margin-top: -5px; text-align: center; display: none;">AKIBA'S FILMS</h1>
             <div class="film-container">
                 <div class="film-video">
-                    <iframe src="https://www.instagram.com/reel/C-DVmInodIj/embed/" width="100%" height="400" frameborder="0" scrolling="no" allowtransparency="true" allow="encrypted-media"></iframe>
+                    <iframe width="100%" height="400" src="https://www.youtube.com/embed/oJEY77e4wMI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="film-info">
                     <h2 class="film-title">A is for AKIBA</h2>
@@ -1111,7 +1270,11 @@
                 <a href="https://www.instagram.com/akibahaiozi/" target="_blank" class="footer-link">Instagram</a>
                 <a href="javascript:showGamesPage();" class="footer-link">GAMES</a>
             </div>
-            <p class="copyright">© 2025 Akiba's World. All rights reserved.</p>
+            <p class="about-text" style="max-width: 800px; margin: 0 auto 20px; text-align: center; opacity: 0.7; font-size: 14px;">
+                <strong>AKIBA STUDIOS is a lifestyle brand founded in Nairobi, Kenya in 2021 that bridges bespoke craftsmanship with ready-to-wear streetwear collections.</strong><br><br>
+                Akiba Studios has established a distinctive identity by creating powerful designs that forge new African narratives through their unique aesthetic approach across fashion, film, and interactive media. Their consistent and immediately recognizable visual language is cultivated through intentional branding and compelling storytelling that spans multiple creative disciplines.
+            </p>
+            <p class="copyright">© 2025 AKIBA STUDIOS. All rights reserved.</p>
         </footer>
     </div>
     
@@ -1128,7 +1291,9 @@
             <video autoplay muted loop class="header-video">
                 <source src="https://cdn.shopify.com/videos/c/o/v/9b081394371a4d7b8edc10c637ee5564.mov" type="video/mp4">
             </video>
-            <h1 class="header-title">AKIBA ARCADE</h1>
+            <div style="display: flex; justify-content: center; align-items: center; z-index: 1;">
+                <img src="https://i.imgur.com/d4ZkQLG.gif" alt="Akiba Arcade" style="width: 1000px; cursor: pointer;" onclick="showLandingPage()">
+            </div>
             
             <!-- Game-themed Decorative Elements -->
             <div class="collage-element circle" style="top: 10%; left: 10%;"></div>
@@ -1143,12 +1308,12 @@
             <div class="pattern-overlay"></div>
             <div class="game-container">
                 <div class="game-frame">
-                    <iframe width="100%" height="400" allow="fullscreen; autoplay; encrypted-media" src="https://games.construct.net/904/latest" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no" muted></iframe>
+                    <iframe width="100%" height="400" allow="fullscreen; autoplay; encrypted-media" src="https://games.construct.net/633/latest" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no" muted></iframe>
                 </div>
                 <div class="game-info">
-                    <h2 class="game-title">AKIBA BEAR ADVENTURE</h2>
+                    <h2 class="game-title">AKIBA'S WORLD</h2>
                     <p class="game-description">
-                        Join Akiba Bear on an epic adventure! Help him navigate through challenging terrains and obstacles as he embarks on a quest to find the elusive Polar Bear. Collect special items, solve puzzles, and discover hidden secrets along the way.
+                        Navigate on an epic adventure through Akiba's World! Navigate through challenging terrains and obstacles as he embarks on a quest to find the elusive Studio 18 Rave. Collect special items, solve puzzles, and discover hidden secrets along the way.
                     </p>
                     <div class="game-credits">
                         Developed by: Akiba Studios<br>
@@ -1165,19 +1330,44 @@
         <!-- Game 2 Section -->
         <section id="game2" class="game-section">
             <div class="pattern-overlay"></div>
-            <div class="game-container">
-                <div class="game-frame">
-                    <iframe width="100%" height="400" allow="fullscreen; autoplay; encrypted-media" src="https://games.construct.net/2/latest" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no" muted></iframe>
-                </div>
+            <div class="game-container" style="position: relative; border-top: none !important;">
+                <!-- Remove any blue lines or borders -->
+                <style>
+                    /* Hide any blue horizontal line above the title */
+                    #game2 .horizontal-line,
+                    #game2::before,
+                    #game2::after,
+                    #game2 .game-container::before,
+                    #game2 .game-container::after,
+                    #game2 .game-container > .horizontal-line,
+                    #game2 .game-title::before,
+                    #game2 .blue-bar {
+                        display: none !important;
+                    }
+                    
+                    /* Remove top border from container */
+                    #game2 .game-container {
+                        border-top: none !important;
+                    }
+                    
+                    #game2 .game-info {
+                        border-right: none !important;
+                        border-top: none !important;
+                    }
+                </style>
+                
                 <div class="game-info">
-                    <h2 class="game-title">DUNGEON LOOTER</h2>
+                    <h2 class="game-title">RUNWAY RUSH</h2>
                     <p class="game-description">
-                        Enter the dungeon, loot monsters and return to Akiba's hut to upgrade your gear. Return to fight harder and tougher monsters! This roguelike adventure features procedurally generated dungeons, a variety of enemies, and unique loot to discover on each run.
+                        In <strong>Runway Rush</strong>, you're not just driving a Matatu; you're transporting the latest fashion trends to the most anticipated photoshoot of the season. Navigate through the Nairobi streets, avoiding boddas and other mats, to ensure your models arrive on time and in style. Collect fashion items and bonuses along the way to upgrade your nganya and unlock new outfits for your models. Will you make it to the shoot before the jam?
                     </p>
                     <div class="game-credits">
                         Developed by: Akiba Game Studios<br>
                         Lead Designer: Akiba Team
                     </div>
+                </div>
+                <div class="game-frame">
+                    <iframe width="100%" height="400" allow="fullscreen; autoplay; encrypted-media" src="https://games.construct.net/44942/latest" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no" muted></iframe>
                 </div>
             </div>
             <!-- Game-themed Decorative Elements -->
@@ -1194,9 +1384,9 @@
                     <iframe width="100%" height="400" allow="fullscreen; autoplay; encrypted-media" src="https://games.construct.net/253/latest" frameborder="0" allowfullscreen="true" msallowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" allowpaymentrequest="false" referrerpolicy="unsafe-url" sandbox="allow-same-origin allow-forms allow-scripts allow-pointer-lock allow-orientation-lock allow-popups" scrolling="no" muted></iframe>
                 </div>
                 <div class="game-info">
-                    <h2 class="game-title">FASHION FRENZY</h2>
+                    <h2 class="game-title">RUNWAY SWING</h2>
                     <p class="game-description">
-                        Become the ultimate fashion designer in this fast-paced game! Create stylish outfits, run your own boutique, and dress models for runway shows. Compete against AI designers or challenge your friends in multiplayer mode to see who can create the most innovative and trendy designs.
+                        Become the ultimate fashion golfer in this stylish and fast-paced game! Compete against the computer or challenge friends in multiplayer mode to see who can score the best while looking their best. Will you be the most fashionable golfer on the course?
                     </p>
                     <div class="game-credits">
                         Developed by: Akiba Interactive<br>
@@ -1218,7 +1408,11 @@
                 <a href="javascript:showContentPage();" class="footer-link">FILMS</a>
                 <a href="https://www.instagram.com/akibahaiozi/" target="_blank" class="footer-link">Instagram</a>
             </div>
-            <p class="copyright">© 2025 Akiba's World. All rights reserved.</p>
+            <p class="about-text" style="max-width: 800px; margin: 0 auto 20px; text-align: center; opacity: 0.7; font-size: 14px;">
+                <strong>AKIBA STUDIOS is a lifestyle brand founded in Nairobi, Kenya in 2021 that bridges bespoke craftsmanship with ready-to-wear streetwear collections.</strong><br><br>
+                Akiba Studios has established a distinctive identity by creating powerful designs that forge new African narratives through their unique aesthetic approach across fashion, film, and interactive media. Their consistent and immediately recognizable visual language is cultivated through intentional branding and compelling storytelling that spans multiple creative disciplines.
+            </p>
+            <p class="copyright">© 2025 AKIBA STUDIOS. All rights reserved.</p>
         </footer>
     </div>
     
